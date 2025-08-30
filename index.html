@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Agent POC - Multi-Tool Reasoning</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Alert Container -->
+    <div id="alert-container" class="position-fixed top-0 start-50 translate-middle-x" style="z-index: 1060; margin-top: 20px;"></div>
+
+    <!-- Main Container -->
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Main Chat Area -->
+            <div class="col-12 d-flex flex-column h-100">
+                <!-- Header -->
+                <header class="py-3 border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="h4 mb-0">
+                            <i class="bi bi-robot me-2"></i>
+                            LLM Agent POC
+                        </h1>
+                        <div class="d-flex gap-2">
+                            <button id="configure-llm-btn" class="btn btn--outline btn--sm">
+                                <i class="bi bi-gear me-1"></i>
+                                Configure LLM
+                            </button>
+                            <button id="clear-chat-btn" class="btn btn--secondary btn--sm">
+                                <i class="bi bi-trash me-1"></i>
+                                Clear Chat
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Status Bar -->
+                <div id="status-bar" class="py-2 border-bottom hidden">
+                    <small class="text-muted">
+                        <span id="model-status">No model configured</span>
+                        <span class="mx-2">•</span>
+                        <span id="tools-status">Tools: Web Search, AI Pipe, JS Execution</span>
+                    </small>
+                </div>
+
+                <!-- Conversation Area -->
+                <div id="conversation-area" class="flex-grow-1 overflow-auto px-3 py-3">
+                    <div id="messages-container">
+                        <div class="welcome-message card">
+                            <div class="card__body">
+                                <h5 class="mb-3">Welcome to the LLM Agent POC!</h5>
+                                <p class="mb-2">This agent can use multiple tools to help you:</p>
+                                <ul class="mb-3">
+                                    <li><strong>Web Search:</strong> Find current information online</li>
+                                    <li><strong>AI Workflows:</strong> Process data through AI pipelines</li>
+                                    <li><strong>Code Execution:</strong> Run JavaScript code safely</li>
+                                </ul>
+                                <p class="mb-0">
+                                    <strong>Getting Started:</strong> Configure your LLM provider above, then ask me anything!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="border-top p-3">
+                    <form id="message-form" class="d-flex gap-2">
+                        <div class="flex-grow-1">
+                            <textarea 
+                                id="message-input" 
+                                class="form-control" 
+                                placeholder="Ask me anything... I can search the web, run code, or use AI workflows!"
+                                rows="2"
+                                style="resize: none;"
+                            ></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary" id="send-btn">
+                            <i class="bi bi-send"></i>
+                            <span class="d-none d-sm-inline ms-1">Send</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LLM Configuration Modal -->
+    <div class="modal fade" id="llm-config-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Configure LLM Provider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="llm-provider-container">
+                        <!-- LLM provider selector will be inserted here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn--primary" id="save-config-btn">Save Configuration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Bootstrap LLM Provider -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-llm-provider@1.3/dist/bootstrap-llm-provider.min.js"></script>
+    
+    <!-- Bootstrap Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-alert@1.0.0/dist/bootstrap-alert.min.js"></script>
+    
+    <!-- Main Application -->
+    <script src="app.js"></script>
+</body>
+</html>
